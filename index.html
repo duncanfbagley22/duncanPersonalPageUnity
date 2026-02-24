@@ -118,5 +118,25 @@
       document.body.appendChild(script);
 
     </script>
+        <script>
+      window.addEventListener('message', function(e) {
+        const data = e.data;
+        if (!data || !data.type || !data.key) return;
+
+        const canvas = document.querySelector('#unity-canvas');
+        const eventInit = {
+          key: data.key,
+          code: data.code,
+          keyCode: data.keyCode || 0,
+          which: data.keyCode || 0,
+          bubbles: true,
+          cancelable: true,
+        };
+
+        if (canvas) canvas.dispatchEvent(new KeyboardEvent(data.type, eventInit));
+        document.dispatchEvent(new KeyboardEvent(data.type, eventInit));
+        window.dispatchEvent(new KeyboardEvent(data.type, eventInit));
+      });
+    </script>
   </body>
 </html>

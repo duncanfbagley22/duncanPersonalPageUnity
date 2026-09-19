@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
+    <div id="link-overlay">
+  <div id="link-dialog">
+    <p>Open external link?</p>
+    <button id="link-open-button">OPEN LINK</button>
+    <button id="link-cancel-button">CANCEL</button>
+  </div>
+</div>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
@@ -56,11 +63,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/duncanPersonalPageUnityv3.loader.js";
+      var loaderUrl = buildUrl + "/duncanPersonalPageUnityv4.loader.js";
       var config = {
-        dataUrl: buildUrl + "/duncanPersonalPageUnityv3.data",
-        frameworkUrl: buildUrl + "/duncanPersonalPageUnityv3.framework.js",
-        codeUrl: buildUrl + "/duncanPersonalPageUnityv3.wasm",
+        dataUrl: buildUrl + "/duncanPersonalPageUnityv4.data",
+        frameworkUrl: buildUrl + "/duncanPersonalPageUnityv4.framework.js",
+        codeUrl: buildUrl + "/duncanPersonalPageUnityv4.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "DuncanPersonalPage",
@@ -114,6 +121,31 @@
                 alert(message);
               });
             };
+
+var linkOverlay = document.getElementById("link-overlay");
+var linkOpenButton = document.getElementById("link-open-button");
+var linkCancelButton = document.getElementById("link-cancel-button");
+
+var pendingURL = "";
+
+function showLinkPrompt(url) {
+    pendingURL = url;
+    linkOverlay.style.display = "flex";
+}
+
+linkOpenButton.addEventListener("click", function () {
+    if (pendingURL !== "") {
+        window.open(pendingURL, "_blank");
+    }
+
+    linkOverlay.style.display = "none";
+    pendingURL = "";
+});
+
+linkCancelButton.addEventListener("click", function () {
+    linkOverlay.style.display = "none";
+    pendingURL = "";
+});
 
       document.body.appendChild(script);
 

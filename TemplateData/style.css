@@ -22,7 +22,7 @@ body { padding: 0; margin: 0 }
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(37, 43, 53, 0.65); /* var(--color-text) tinted, softer than pure black */
 
     display: none;
     align-items: center;
@@ -32,14 +32,15 @@ body { padding: 0; margin: 0 }
 }
 
 #link-dialog {
-    background: white;
+    background: #ffffff; /* matches every other popup in the project */
     padding: 25px;
-    border-radius: 12px;
+    border-radius: 8px; /* same radius as .overworld-popup-content / .favorites-popup-content */
     text-align: center;
 
     width: min(80%, 350px);
-
     box-sizing: border-box;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #link-dialog p {
@@ -48,7 +49,7 @@ body { padding: 0; margin: 0 }
 
     font-family: Arial, sans-serif;
     font-size: 20px;
-    color: #222;
+    color: #252b35; /* var(--color-text) */
 }
 
 #link-dialog button {
@@ -58,21 +59,42 @@ body { padding: 0; margin: 0 }
     padding: 14px;
     margin-top: 10px;
 
-    border: none;
-    border-radius: 8px;
+    border: 3px solid #354a76; /* var(--color-primary-dark) */
+    border-radius: 0;
 
     font-family: Arial, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 
     cursor: pointer;
+    transition: background-color 0.1s ease;
+
+    /* Same stepped-corner "blocky" clip used on every button in the
+       project (close-button, overworld-popup-button, console buttons). */
+    clip-path: polygon(
+        0 4px, 4px 4px, 4px 0,
+        calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+        100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px),
+        calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px),
+        0 calc(100% - 4px)
+    );
 }
 
 #link-open-button {
-    background: #333;
-    color: white;
+    background-color: #536d9c; /* var(--color-secondary-dark) */
+    color: #ffffff;
+}
+
+#link-open-button:hover {
+    background-color: #354a76; /* var(--color-primary-dark) */
 }
 
 #link-cancel-button {
-    background: #ddd;
-    color: #222;
+    background-color: #d1d5e3; /* var(--color-tertiary) */
+    color: #252b35; /* var(--color-text) */
+}
+
+#link-cancel-button:hover {
+    background-color: #c6c9d8; /* var(--color-quaternary) */
 }
